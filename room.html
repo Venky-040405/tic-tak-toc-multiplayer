@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap"
+        rel="stylesheet">
+
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0%;
+
+        }
+
+        body {
+            background: linear-gradient(135deg, cyan, #ACB6E5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .room {
+            display: flex;
+            box-sizing: border-box;
+            flex-direction: column;
+            height: 500px;
+            width: 700px;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, rgb(96, 225, 225), #ACB6E5);
+            border-radius: 10px;
+            border: 1px solid rgb(143, 141, 141);
+        }
+
+        .create {
+            font-size: 30px;
+            border-radius: 10px;
+            border: 5px solid #ffffff22;
+            box-shadow: 1px 2px 10px 1px rgb(94, 91, 91);
+            /*box-shadow: 4px 4px 1px 1px #222222;
+            text-shadow: 2px 1px 1px rgb(130, 128, 128);*/
+            cursor: pointer;
+        }
+
+        #roomid,
+        #joined {
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 2px solid black;
+            color: rgb(0, 0, 0);
+            font-size: 30px;
+            border-radius: 10px;
+            background-color: rgb(241, 255, 255);
+            border: 5px solid #ffffff22;
+            box-shadow: 1px 2px 10px 1px rgb(94, 91, 91);
+            /*box-shadow: 1px 2px 10px 1px rgb(94, 91, 91);
+            box-shadow: 4px 4px 1px 1px #222222;
+            margin-right: 10px;
+            /*text-shadow: 2px 1px 1px rgb(130, 128, 128);*/
+        }
+
+        #joined {
+            cursor: pointer;
+        }
+
+        #roomstatus {
+            font-size: 30px;
+            height: 40px;
+            width: 400px;
+            margin-top: 50px;
+            border-radius: 10px;
+            font-style: normal;
+            color: cyan;
+            text-align: center;
+        }
+
+
+        .result {
+            height: 100px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        h1 {
+            margin-top: 50px;
+            font-family: "inter", sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            color: rgb(33, 30, 30);
+        }
+
+
+        @media screen and (max-width: 765px) {
+            body {
+                background: linear-gradient(135deg, cyan, #ACB6E5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .create {
+                font-size: x-large;
+                border-radius: 10px;
+                border: 5px solid #ffffff22;
+                box-shadow: 1px 2px 10px 1px rgb(94, 91, 91);
+                /*box-shadow: 4px 4px 1px 1px #222222;*/
+                /*text-shadow: 2px 1px 1px rgb(130, 128, 128);*/
+                cursor: pointer;
+            }
+
+            #roomid,
+            #joined {
+                margin-top: 20px;
+                color: rgb(0, 0, 0);
+                font-size: x-large;
+                border-radius: 10px;
+                background-color: rgb(241, 255, 255);
+                border: 5px solid #ffffff22;
+                box-shadow: 1px 2px 10px 1px rgb(94, 91, 91);
+                /*box-shadow: 4px 4px 1px 1px #222222;*/
+                margin-right: 10px;
+                /*text-shadow: 2px 1px 1px rgb(130, 128, 128);*/
+            }
+
+            #joined {
+                cursor: pointer;
+                display: block;
+                margin-left: 32%;
+            }
+
+            #roomstatus {
+                font-size: 30px;
+                height: 40px;
+                width: 400px;
+                margin-top: 50px;
+                border-radius: 10px;
+                font-style: normal;
+                color: cyan;
+                text-align: center;
+            }
+
+
+            .result {
+                height: 100px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            h1 {
+                margin-top: 50px;
+                font-family: "Oswald", sans-serif;
+                font-style: normal;
+                font-weight: 500;
+                color: rgb(33, 30, 30);
+            }
+
+            .room {
+                display: flex;
+                box-sizing: border-box;
+                flex-direction: column;
+                height: 80dvh;
+                width: 350px;
+                justify-content: center;
+                align-items: center;
+                background: linear-gradient(135deg, rgb(96, 225, 225), #ACB6E5);
+                border-radius: 10px;
+                border: 1px solid rgb(143, 141, 141);
+
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Room Create and Join </h1>
+    <div class="room">
+
+        <button class="create" id="create">Createroom</button>
+
+        <div class="join">
+            <input type="text" name="roomid" id="roomid" placeholder="enter a roomid">
+            <button id="joined" type="button">join room</button>
+        </div>
+
+        <div class="result">
+            <p id="roomstatus" float="right" margin="3px"></p><!-- <button id="copy">Copy Room ID</button>
+ -->
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-database-compat.js"></script>
+    <script type="module" src="roomcrt.js"></script>
+
+</body>
+
+</html>

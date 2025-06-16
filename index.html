@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: rgb(92, 240, 240);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        .auth-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+            height: 450px;
+            border: 1px solid rgb(255, 255, 255);
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 2px 10px 1px rgb(94, 91, 91);
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #email,
+        #password {
+            font-size: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            height: 30px;
+            width: 255px;
+            background-color: transparent;
+            border: 1px solid rgb(130, 130, 130);
+        }
+
+        #signin {
+            height: 40px;
+            width: 255px;
+            margin-top: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 110, 255);
+            font-family: "inter", sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        #signin:hover {
+            background-color: rgb(8, 53, 112);
+        }
+
+        h2 {
+            font-family: "inter", sans-serif;
+            font-style: normal;
+            color: rgb(33, 30, 30);
+            font-weight: 500;
+            font-size: 30px;
+        }
+
+        h1 {
+            margin-top: 5%;
+            font-family: "Oswald", sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            color: rgb(33, 30, 30);
+        }
+
+        @media screen and (max-width:765px) {
+            .auth-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 300px;
+                height: 450px;
+                border: 1px solid rgb(255, 255, 255);
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 1px 2px 10px 1px rgb(94, 91, 91);
+
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TIC TAK TAC GAME</h1>
+    <div class="auth-container">
+        <h2>Login</h2>
+        <form>
+            <input id="email" type="email" placeholder="Email" required>
+            <input id="password" type="password" placeholder="Password" required>
+            <button id="signin" type="submit">Sign in</a></button>
+        </form>
+    </div>
+
+
+    <script type="module">
+        const button = document.getElementById("signin");
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { getDatabase, set, ref, update, onValue, get } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-79xegBgcFgdVLNbZRQRuozdR3j0hwrA",
+            authDomain: "tic-tik-tae.firebaseapp.com",
+            projectId: "tic-tik-tae",
+            storageBucket: "tic-tik-tae.firebasestorage.app",
+            messagingSenderId: "376258770437",
+            appId: "1:376258770437:web:92a13cd3c4796836f94e6c",
+            measurementId: "G-QN6SKE494D"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const database = getDatabase();
+
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+
+
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+
+                    set(ref(database, 'users/' + user.uid), {
+                        email: email,
+                        password: password,
+                    })
+                        .then(() => {
+                            alert("user successfully");
+                            window.location.href = "room.html";
+                        })
+                        .catch((error) => {
+                            alert(error);
+                        });
+
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+
+
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    get(ref(database, 'users/' + user.uid))
+                        .then((snapshot) => {
+                            if (snapshot.exists()) {
+                                alert("already user successfully");
+                                window.location.href = "room.html";
+                            }
+                        })
+                        .catch((error) => {
+                            alert(error);
+                        });
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                });
+        });
+    </script>
+
+</body>
+
+</html>
