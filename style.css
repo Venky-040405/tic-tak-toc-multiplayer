@@ -51,9 +51,9 @@ body {
 #players {
     color: rgb(255, 255, 255);
     text-align: center;
-    font-style: unset;
+    font-style: normal;
     font-size: xx-large;
-    font-weight: lighter;
+    font-weight: bold;
 }
 
 .grid0,
@@ -101,11 +101,16 @@ body {
 }
 
 #result {
-    font-size: 50px;
+    font-size: 40px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-style: normal;
-    font-weight: bolder;
-    color: rgb(255, 255, 255);
+    font-weight: lighter;
+    color: black;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: white;
+    width: 100px;
+    text-align: center;
 }
 
 h6 {
@@ -118,7 +123,7 @@ h1 {
     color: rgb(255, 255, 255);
     font-family: "Oswald", sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: revert;
 
 }
 
