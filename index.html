@@ -76,8 +76,24 @@
             font-style: italic;
             font-weight: 500;
         }
+         #create {
+            height: 40px;
+            width: 255px;
+            margin-top: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 110, 255);
+            font-family: "inter", sans-serif;
+            font-style: italic;
+            font-weight: 500;
+        }
 
         #signin:hover {
+            background-color: rgb(8, 53, 112);
+        }
+
+        #create:hover {
             background-color: rgb(8, 53, 112);
         }
 
@@ -123,13 +139,14 @@
         <form>
             <input id="email" type="email" placeholder="Email" required>
             <input id="password" type="password" placeholder="Password" required>
-            <button id="signin" type="submit">Sign in</a></button>
+            <button id="create" type="submit">create </a></button> <button id="signin" type="submit">Sign in</a></button>
         </form>
     </div>
 
 
     <script type="module">
-        const button = document.getElementById("signin");
+        const button = document.getElementById("create");
+        const button1 = document.getElementById("signin");
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
@@ -179,9 +196,15 @@
                     const errorMessage = error.message;
                     alert(errorMessage);
                 });
+        });
+
+        button1.addEventListener('click', (e) => {
+            e.preventDefault();
 
 
-
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in 
